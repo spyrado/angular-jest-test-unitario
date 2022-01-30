@@ -27,17 +27,11 @@ export class PostsComponent implements OnInit {
       .subscribe(
         {
           next: (posts) => {
-            console.log(posts);
             this.posts = posts;
-            this.teste();
           },
           error: (error) => console.log(error)
         }
       );
-  }
-
-  teste() {
-
   }
 
 }

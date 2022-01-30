@@ -54,13 +54,21 @@ describe('PostsComponent', () => {
 
     // Como testar chamada de serviços dentro de uma metodo
     it('should call postsService.get method', fakeAsync(() => {
-
       component.getPosts();
       tick(); // usamos antes de começarmos a validar os testes
-      
       expect(spyPostsServiceGet).toHaveBeenCalled();      
       expect(spyPostsServiceGet).toHaveBeenCalledTimes(1);      
+    }));
 
+    it('should receive posts from service', fakeAsync (() => {
+
+      expect(component.posts.length).toEqual(0);
+      component.getPosts();
+
+      tick();
+      
+      expect(component.posts.length).toEqual(1);
+      expect(component.posts).toEqual(GET_POSTS);
     }));
   });
 
