@@ -30,4 +30,19 @@ describe('PostsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should be the string Posts', () => {
+    expect(component.pageTitle).toEqual('Posts');
+  });
+
+  describe('[method] -> ngOnInit', () => {
+
+    it('should call getPosts method', () => {
+      let spyGetPosts =  jest.spyOn(component, 'getPosts');
+      component.ngOnInit();
+      expect(spyGetPosts).toHaveBeenCalled();
+    });
+
+  });
+
 });

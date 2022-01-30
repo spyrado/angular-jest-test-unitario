@@ -11,6 +11,8 @@ import { PostsService } from './shared/services/posts.service';
 })
 export class PostsComponent implements OnInit {
 
+  pageTitle = 'Posts';
+
   constructor(private postsService: PostsService) { }
 
   ngOnInit(): void {
