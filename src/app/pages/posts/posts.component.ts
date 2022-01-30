@@ -19,15 +19,22 @@ export class PostsComponent implements OnInit {
     this.getPosts();
   }
 
-  async getPosts() {
+  getPosts() {
     this.postsService
       .get()
       .subscribe(
         {
-          next: (posts) => console.log(posts),
+          next: (posts) => {
+            console.log(posts);
+            this.teste();
+          },
           error: (error) => console.log(error)
         }
       );
+  }
+
+  teste() {
+
   }
 
 }

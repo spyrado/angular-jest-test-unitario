@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { PostsComponent } from './posts.component';
@@ -55,16 +55,28 @@ describe('PostsComponent', () => {
       expect(service).toBeTruthy();
     });
 
-    it('should call postsService.get method', async () => {
+    // Como testar chamada de serviços dentro de uma metodo
+    it('should call postsService.get method', fakeAsync(() => {
 
-      const spyPostsServiceGet = jest.spyOn(component['postsService'], 'get');
+      const data = [
+        {
+            "userId": 1,
+            "id": 1,
+            "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+            "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+        }
+      ];
+      const spyPostsServiceGet = jest.spyOn(component['postsService'], 'get').mockReturnValue(of(data));
+      const spyTeste = jest.spyOn(component, 'teste');
 
       component.getPosts();
-      fixture.detectChanges();
+      tick(); // usamos antes de começarmos a validar os testes
       
       expect(spyPostsServiceGet).toHaveBeenCalled();      
       expect(spyPostsServiceGet).toHaveBeenCalledTimes(1);      
-    });
+
+      expect(spyTeste).toHaveBeenCalled();
+    }));
   });
 
 });
