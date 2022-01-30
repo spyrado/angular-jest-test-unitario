@@ -61,28 +61,20 @@ describe('PostsComponent', () => {
     }));
 
     it('BEFORE execute funcion posts.length should be equal to 0', fakeAsync (() => {
-      
       expect(component.posts.length).toEqual(0);
       component.getPosts();
-
       tick();
     }));
 
     it('AFTER execute funcion posts.length should be equal to 1', fakeAsync (() => {
-
       component.getPosts();
-
       tick();
-
       expect(component.posts.length).toEqual(1);
     }));
 
     it('should receive posts from service and NOT transform the array.', fakeAsync (() => {
-
       component.getPosts();
-
       tick();
-      
       expect(component.posts).toEqual(GET_POSTS);
     }));
   });
