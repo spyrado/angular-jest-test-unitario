@@ -1,14 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { PostsServiceStub } from 'src/stubs/stubs.mock';
 
 import { PostsComponent } from './posts.component';
+import { PostsService } from './shared/services/posts.service';
 
 describe('PostsComponent', () => {
   let component: PostsComponent;
   let fixture: ComponentFixture<PostsComponent>;
+  let postsService: PostsService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PostsComponent ]
+      declarations: [ PostsComponent ],
+      imports: [ HttpClientTestingModule ],
+      providers: [ PostsService ]
     })
     .compileComponents();
   });
@@ -17,6 +23,8 @@ describe('PostsComponent', () => {
     fixture = TestBed.createComponent(PostsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    postsService = TestBed.inject(PostsService);
   });
 
   it('should create', () => {
