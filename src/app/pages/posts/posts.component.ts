@@ -19,7 +19,7 @@ export class PostsComponent implements OnInit {
     this.getPosts();
   }
 
-  getPosts() {
+  async getPosts() {
     this.postsService
       .get()
       .subscribe(

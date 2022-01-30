@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { PostsServiceStub } from 'src/stubs/stubs.mock';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { PostsComponent } from './posts.component';
 import { PostsService } from './shared/services/posts.service';
+import { of } from 'rxjs';
 
 describe('PostsComponent', () => {
   let component: PostsComponent;
   let fixture: ComponentFixture<PostsComponent>;
-  let postsService: PostsService;
+  let service: PostsService;
+  let httpController: HttpTestingController;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -23,8 +24,6 @@ describe('PostsComponent', () => {
     fixture = TestBed.createComponent(PostsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
-    postsService = TestBed.inject(PostsService);
   });
 
   it('should create', () => {
@@ -41,8 +40,31 @@ describe('PostsComponent', () => {
       let spyGetPosts =  jest.spyOn(component, 'getPosts');
       component.ngOnInit();
       expect(spyGetPosts).toHaveBeenCalled();
+      expect(spyGetPosts).toHaveReturnedTimes(1);
     });
 
+  });
+
+  describe('[method] -> getPosts', () => {
+
+    beforeEach(() => {
+      service = TestBed.inject(PostsService);
+    });
+    
+    it('PostsService should be created', () => {
+      expect(service).toBeTruthy();
+    });
+
+    it('should call postsService.get method', async () => {
+
+      const spyPostsServiceGet = jest.spyOn(component['postsService'], 'get');
+
+      component.getPosts();
+      fixture.detectChanges();
+      
+      expect(spyPostsServiceGet).toHaveBeenCalled();      
+      expect(spyPostsServiceGet).toHaveBeenCalledTimes(1);      
+    });
   });
 
 });
