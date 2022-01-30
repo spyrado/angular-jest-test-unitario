@@ -8,6 +8,7 @@ import { GET_POSTS } from './shared/__mocks__/posts.mock';
 import { IPost } from './shared/interfaces/posts.interface';
 
 describe('PostsComponent', () => {
+  
   let component: PostsComponent;
   let fixture: ComponentFixture<PostsComponent>;
   let spyPostsServiceGet: jest.SpyInstance<Observable<IPost[]>>;
